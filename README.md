@@ -1,4 +1,4 @@
-# Machine Learning Scoring for Cross Languages Programming Assignments by AST and Modified TF-IDF Vectorization.
+# Machine Learning Scoring for Cross Languages Programming Assignments by AST based and Modified TF-IDF Vectorization.
 
 # Requirements:
 - Python 3.6.
