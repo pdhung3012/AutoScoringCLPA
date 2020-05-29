@@ -19,21 +19,16 @@ The following code will run for evaluating range of programming assignment score
 
 **RQ1. What is the accuracy of original TF-IDF classification on code data?**
 
-```python evaluateRQ1.py```
+```python RQ1_MLRunning.py```
 
-- Input: the default is the path 'replicationPackage/data/pretrainedVector/TFIDF4/' (you can go to the code and change paths for other vectorization models)
-- Output: the accuracy of each systems in 10 ML Classification algorithms. You can see the best accuracy on each systems along with the details prediction in 'details/' folder.
-
+To see the output, look in to ../result folder (same with RQ2 and RQ3)
 
 **RQ2. What is the accuracy of modified TF-IDF classification on code data?**
 
 To run for all systems:
 
-```python: RQ1_MLRunning.py```
+```python: RQ2_MLRunning.py```
 
-If you want to run on a specific system such as Moodle, run: 
-
-```python RQ2_MLRunning.py```
 
 **RQ3. What is the accuracy of modified TF-IDF classification on AST nodes?**
 
