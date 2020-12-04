@@ -174,8 +174,8 @@ def getDataFor10Folds(fpInputSubmission, fopTextFolder, fpOutputVectorDistance, 
             csvTFIDF.write(rowTFIDF)
 
 def main():
-    fopInput="/Users/hungphan/Downloads/hw2VectorData/"
-    fopText = "/Users/hungphan/Downloads/hw2TextualInformation/"
+    fopInput="/home/hung/git/dataLocal/hw2VectorData/"
+    fopText = "/home/hung/git/dataLocal/hw2TextualInformation/"
     fpStudentSubmission=fopInput+"StudentScore - ReviseList.csv"
     fpStudentDistance = fopInput + "vectorDistance_folds.csv"
     fpStudentTFIDF = fopInput + "vectorTFTDF_folds.csv"

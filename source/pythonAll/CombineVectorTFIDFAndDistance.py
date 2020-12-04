@@ -173,8 +173,8 @@ def combineData(fpInputSubmission, fopTextFolder,fpInputDistanceFromPrevious, fp
 
 
 def main():
-    fopInput="/Users/hungphan/Downloads/hw2VectorData/"
-    fopText = "/Users/hungphan/Downloads/hw2TextualInformation/"
+    fopInput="/home/hung/git/dataLocal/hw2VectorData/"
+    fopText = "/home/hung/git/dataLocal/hw2TextualInformation/"
     fpStudentSubmission=fopInput+"StudentScore - ReviseList.csv"
     fpStudentTFIDF = fopInput + "vectorTFTDF_combines.csv"
     fpInputDistanceFromPrevious = fopInput + "vectorDistance_folds.csv"
