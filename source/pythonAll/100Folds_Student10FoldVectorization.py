@@ -10,17 +10,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from scipy.spatial.distance import cosine
 import nltk
 
-def getPOSFromResponse(string):
-    # li = list(string.split(" "))
-    string = str(string).replace("<p>", "").replace("</p>", "")
-    tokens = nltk.word_tokenize(string)
-    # str2 = uni_tag.tag(tokens)
-    arr =  nltk.pos_tag(tokens)
-    str2=""
-    for(pos,tag) in arr:
-        str2 = str2 + tag + " "
-    newStr = str(str2).replace("[", "").replace("]", "").replace("'", "").replace(",", " ").strip()
-    return newStr
+
 
 def readStringFromFile(fpFile):
     f = open(fpFile, "r")
