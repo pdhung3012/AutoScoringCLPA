@@ -164,13 +164,13 @@ def getDataFor10Folds(fpInputSubmission, fopTextFolder, fpOutputVectorDistance, 
             csv.write(row)
             rowTFIDF=str(indexCorpus+1)+ ',' + str(strTestId)+',' + str(expectedResult) + ','+strVectorContent+ '\n'
             csvTFIDF.write(rowTFIDF)
-
+    csvTFIDF.close()
 def main():
     fopInput="/home/hung/git/dataLocal/hw2VectorData/"
     fopText = "/home/hung/git/dataLocal/hw2TextualInformation/"
     fpStudentSubmission=fopInput+"StudentScore - ReviseList.csv"
     fpStudentDistance = fopInput + "vectorDistance_folds.csv"
-    fpStudentTFIDF = fopInput + "vectorTFTDF_folds.csv"
+    fpStudentTFIDF = fopInput + "vectorTFIDF_folds.csv"
     getDataFor10Folds(fpStudentSubmission, fopText,fpStudentDistance, fpStudentTFIDF)
 
 main()

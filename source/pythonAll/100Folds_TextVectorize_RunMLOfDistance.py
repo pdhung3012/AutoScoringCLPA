@@ -20,6 +20,7 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.model_selection import cross_val_score,cross_val_predict, StratifiedKFold
+from sklearn.metrics import accuracy_score
 import os
 
 def createDirectory(path):
@@ -54,15 +55,30 @@ index = 0
 # group = df_all['label']
 o2=open(fpOutput+'result_all.txt','w')
 k_fold = StratifiedKFold(10,shuffle=True)
+
+arrAcc=[]
+arrCName=[]
+
 for classifier in classifiers:
-                index=index+1
-                filePredict=''.join([fpOutput,'predict_',str(index),'.txt'])
-                print("********", "\n", "10 fold CV Results with: ", str(classifier))
-                cross_val = cross_val_score(classifier, all_data, all_label, cv=k_fold, n_jobs=1)
-                predicted = cross_val_predict(classifier, all_data, all_label, cv=k_fold)
-                np.savetxt(filePredict,predicted,fmt='%s', delimiter=',')
-                o2.write('Result for '+str(classifier)+'\n')
-                o2.write(str(sum(cross_val)/float(len(cross_val)))+'\n')
-                o2.write(str(confusion_matrix(all_label, predicted))+'\n')
-                o2.write(str(classification_report(all_label, predicted))+'\n')
+    index=index+1
+    filePredict=''.join([fpOutput,'predict_',str(index),'.txt'])
+    print("********", "\n", "10 fold CV Results with: ", str(classifier))
+    cross_val = cross_val_score(classifier, all_data, all_label, cv=k_fold, n_jobs=1)
+    predicted = cross_val_predict(classifier, all_data, all_label, cv=k_fold)
+    totalAccScore=accuracy_score(all_label, predicted)
+    cName=str(type(classifier)).split(".")[-1][:-2]
+    arrCName.append(cName)
+    arrAcc.append(totalAccScore)
+    np.savetxt(filePredict,predicted,fmt='%s', delimiter=',')
+    o2.write('Result for '+str(classifier)+'\n')
+    o2.write('Total Accuracy ' + str(totalAccScore) + '\n')
+    o2.write(str(sum(cross_val)/float(len(cross_val)))+'\n')
+    o2.write(str(confusion_matrix(all_label, predicted))+'\n')
+    o2.write(str(classification_report(all_label, predicted))+'\n')
+
+maxIndex=arrAcc.index(max(arrAcc))
+o2.write('Overall accuracy comparison:\n')
+for index in range(0,len(arrAcc)):
+    o2.write('{}\t{}\n'.format(arrCName[index],arrAcc[index]))
+o2.write('\n\nBest one is {}: {}\n'.format(arrCName[maxIndex],arrAcc[maxIndex]))
 o2.close()
