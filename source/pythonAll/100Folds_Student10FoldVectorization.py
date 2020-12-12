@@ -20,6 +20,7 @@ def readStringFromFile(fpFile):
 def printVector(vector):
     strOut=""
     i=0
+    # print(len(vector))
     for item in vector:
         i=i+1
         strOut = strOut+ str(item)
@@ -102,7 +103,7 @@ def getDataFor10Folds(fpInputSubmission, fopTextFolder, fpOutputVectorDistance, 
         vectorizer = TfidfVectorizer(ngram_range=(1, 4))
         X = vectorizer.fit_transform(corpus)
         arrFeatureNames = vectorizer.get_feature_names()
-        # print('names: ' + str(len(arrFeatureNames)) + ' ' + str(arrFeatureNames))
+        # print('names: ' + str(len(arrFeatureNames)))
 
         dictTopicVectors = {strA: [], strAMinus: [], strBPlus: [], strB: [], strBMinus: []}
         dictTopicVectors[strA] = X[0].todense()
@@ -132,6 +133,9 @@ def getDataFor10Folds(fpInputSubmission, fopTextFolder, fpOutputVectorDistance, 
         for i in range(5, len(corpus)):
             # print(str(i)+"\tcontent here")
             vectori = X[i].todense()
+            ai = np.array(vectori)
+            # print('damn {}'.format(len(ai[0])))
+            # print('{}'.format(ai[0]))
             strVectorContent=printVector(X[i].toarray()[0])
 
             distA = cosine_similarity(vectori, dictTopicVectors[strA])[0][0]
