@@ -22,6 +22,7 @@ from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.model_selection import cross_val_score,cross_val_predict, StratifiedKFold
 from sklearn.metrics import accuracy_score
 import os
+import datetime as dt
 
 def createDirectory(path):
     try:
@@ -59,6 +60,7 @@ k_fold = StratifiedKFold(10,shuffle=True)
 arrAcc=[]
 arrCName=[]
 
+start_t = dt.datetime.now()
 for classifier in classifiers:
     index=index+1
     filePredict=''.join([fpOutput,'predict_',str(index),'.txt'])
@@ -76,9 +78,12 @@ for classifier in classifiers:
     o2.write(str(confusion_matrix(all_label, predicted))+'\n')
     o2.write(str(classification_report(all_label, predicted))+'\n')
 
+end_t = dt.datetime.now()
+micSeconds = (end_t - start_t).microseconds
+
 maxIndex=arrAcc.index(max(arrAcc))
 o2.write('Overall accuracy comparison:\n')
 for index in range(0,len(arrAcc)):
     o2.write('{}\t{}\n'.format(arrCName[index],arrAcc[index]))
-o2.write('\n\nBest one is {}: {}\n'.format(arrCName[maxIndex],arrAcc[maxIndex]))
+o2.write('\n\nBest one is {}: {}\nTime: {}\n'.format(arrCName[maxIndex],arrAcc[maxIndex],micSeconds))
 o2.close()

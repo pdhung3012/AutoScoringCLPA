@@ -11,6 +11,8 @@ from scipy.spatial.distance import cosine
 import nltk
 from sklearn.metrics import accuracy_score
 import os
+import datetime as dt
+
 
 def createDirectory(path):
     try:
@@ -43,6 +45,7 @@ def getTFIDFFromText(fpInputSubmission, fopAST, fopText, fpOutputVectorTFIDF, fp
     # my_csv3 = my_csv2[my_csv2.Score != "I-UR"]
     columnRevisedNetID = my_csv.RevisedNetID
     columnScore = my_csv.Score
+
 
 
     strA = 'A'
@@ -119,6 +122,7 @@ def getTFIDFFromText(fpInputSubmission, fopAST, fopText, fpOutputVectorTFIDF, fp
         # print(str(len(corpus)))
     listPredictedResult=[]
     listExpectedResult = []
+    start_t = dt.datetime.now()
     for i in range(5, len(corpus)):
         # print(str(i)+"\tcontent here")
         indexCorpus=i-5
@@ -148,6 +152,8 @@ def getTFIDFFromText(fpInputSubmission, fopAST, fopText, fpOutputVectorTFIDF, fp
         listPredictedResult.append(lstScore[maxIndex])
         print(lstSim[maxIndex])
     csvTFIDF.close()
+    end_t = dt.datetime.now()
+    micSeconds = (end_t - start_t).microseconds
 
     scoreTotalSim=accuracy_score(listExpectedResult, listPredictedResult)
 
@@ -158,7 +164,7 @@ def getTFIDFFromText(fpInputSubmission, fopAST, fopText, fpOutputVectorTFIDF, fp
     fp.write('\n'.join(listExpectedResult))
     fp.close()
     fp=open(fpSummarization,'w')
-    fp.write('Total accuracy: {}\n'.format(scoreTotalSim))
+    fp.write('Total accuracy: {}\nTime: {}\n'.format(scoreTotalSim,micSeconds))
     fp.close()
 
 
